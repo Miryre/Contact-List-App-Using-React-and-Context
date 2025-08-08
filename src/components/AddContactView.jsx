@@ -1,4 +1,4 @@
-// components/AddContactView.jsx - NEW FILE
+
 import React, { useState, useEffect } from 'react';
 import { useContacts } from './ContactContext';
 
@@ -12,17 +12,21 @@ const AddContactView = ({ contactToEdit, onBack, onSave }) => {
   
   const [errors, setErrors] = useState({});
   const { createContact, updateContact, loading } = useContacts();
+  const { contacts } = useContacts();
 
   useEffect(() => {
-    if (contactToEdit) {
-      setFormData({
-        name: contactToEdit.name || '',
-        email: contactToEdit.email || '',
-        phone: contactToEdit.phone || '',
-        address: contactToEdit.address || ''
-      });
+    if (contactToEdit && contactToEdit.id) {
+      const contact = contacts.find(c => c.id === contactToEdit.id);
+      if (contact) {
+        setFormData({
+          name: contact.name || '',
+          email: contact.email || '',
+          phone: contact.phone || '',
+          address: contact.address || ''
+        });
+      }
     }
-  }, [contactToEdit]);
+  }, [contactToEdit, contacts]);
 
   const validateForm = () => {
     const newErrors = {};

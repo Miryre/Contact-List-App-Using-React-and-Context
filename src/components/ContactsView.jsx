@@ -8,9 +8,10 @@ const ContactsView = ({ onAddContact, onEditContact }) => {
   const { deleteContact } = useContacts();
 
   // Handle editing a contact
-  const handleEdit = (contact) => {
-    onEditContact(contact);
-  };
+// Handle editing a contact
+const handleEdit = (contact) => {
+  window.location.href = `/edit/${contact.id}`;
+};
 
   // Handle deleting a contact
   const handleDelete = async (contactId) => {
@@ -186,7 +187,7 @@ const ContactsView = ({ onAddContact, onEditContact }) => {
 
         {/* Add Contact Button */}
         <button
-          onClick={onAddContact}
+          onClick={() => window.location.href = '/add'}
           style={{
             padding: '12px 24px',
             borderRadius: '8px',
